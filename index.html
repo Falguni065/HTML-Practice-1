@@ -9,25 +9,41 @@
 </head>
 
 <body>
-    <header>
 
-    </header>
     <main>
         <h1>Hello</h1>
         <div class="card">
             <div class="search">
                 <input type="text" placeholder="city">
+                <button>Search</button>
             </div>
             <div class="weather">
-                <h1 class="temp">22</h1>
+                <h2 class="city"></h2>
+                <h1 class="temp"></h1>
+                <h3 class="humidity"></h3>
+                <!-- https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=56e4f38294c076839924348d5f33036c -->
             </div>
 
         </div>
 
     </main>
-    <footer>
+    <script>
+        const apiKey = "56e4f38294c076839924348d5f33036c";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=toronto";
 
-    </footer>
+        async function checkWeather() {
+
+            const res = await fetch(apiUrl + `&appid=${apiKey}`);
+            var data = await res.json();
+            console.log(data);
+            document.querySelector(".city").innerHTML = data.name;
+            document.querySelector(".temp").innerHTML = Math.round(data.main.temp);
+            document.querySelector(".humidity").innerHTML = data.main.humidity;
+        }
+
+        checkWeather();
+
+    </script>
 
 </body>
 
